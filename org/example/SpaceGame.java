@@ -1,5 +1,3 @@
-package org.example;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -67,10 +65,10 @@ public class SpaceGame extends JFrame implements KeyListener {
         try {
             shipImage = ImageIO.read(new File("RocketShip.png"));
             spriteSheet = ImageIO.read(new File("Astro.png"));
-        //} catch ( LineUnavailableException ex) {
+            //} catch ( LineUnavailableException ex) {
             //ex.printStackTrace();
-        //} catch (UnsupportedAudioFileException ex) {
-           // ex.printStackTrace();
+            //} catch (UnsupportedAudioFileException ex) {
+            // ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
