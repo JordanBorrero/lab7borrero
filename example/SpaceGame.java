@@ -67,10 +67,13 @@ public class SpaceGame extends JFrame implements KeyListener {
         try {
             shipImage = ImageIO.read(new File("RocketShip.png"));
             spriteSheet = ImageIO.read(new File("Astro.png"));
-            //} catch ( LineUnavailableException ex) {
-            //ex.printStackTrace();
-            //} catch (UnsupportedAudioFileException ex) {
-            // ex.printStackTrace();
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("fire.mp3").getAbsoluteFile());
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            } catch ( LineUnavailableException ex) {
+                ex.printStackTrace();
+            } catch (UnsupportedAudioFileException ex) {
+                ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -266,6 +269,13 @@ public class SpaceGame extends JFrame implements KeyListener {
         }
     }
 
+    public void playSound() {
+        if (clip != null){
+            clip.setFramePosition(0);
+            clip.start();
+        }
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -274,6 +284,7 @@ public class SpaceGame extends JFrame implements KeyListener {
         } else if (keyCode == KeyEvent.VK_RIGHT && playerX < WIDTH - PLAYER_WIDTH) {
             playerX += PLAYER_SPEED;
         } else if (keyCode == KeyEvent.VK_SPACE && !isFiring) {
+            playSound();
             isFiring = true;
             projectileX = playerX + PLAYER_WIDTH / 2 - PROJECTILE_WIDTH / 2;
             projectileY = playerY;
